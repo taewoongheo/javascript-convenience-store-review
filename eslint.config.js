@@ -7,7 +7,7 @@ import eslintConfigPrettier from 'eslint-config-prettier';
 
 // mimic CommonJS variables -- not needed if using CommonJS
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+export const __dirname = path.dirname(__filename);
 
 const compat = new FlatCompat({
   baseDirectory: __dirname,
@@ -25,6 +25,7 @@ export default [
     },
     rules: {
       'import/extensions': ['error', 'ignorePackages'],
+      'class-methods-use-this': 'off',
     },
   },
   {
