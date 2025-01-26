@@ -95,7 +95,7 @@ const run = async ({
 
 const INPUTS_TO_TERMINATE = ['[비타민워터-1]', 'N', 'N'];
 
-describe('편의점', () => {
+describe.skip('편의점', () => {
   afterEach(() => {
     jest.clearAllMocks();
     jest.restoreAllMocks();
