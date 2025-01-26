@@ -52,5 +52,7 @@
 - Membership: 멤버십
 - Receipt: 영수증
 
+## Structure
+
 - MVC 구조
 - 비즈니스 로직 분리를 위해 Service layer 추가
