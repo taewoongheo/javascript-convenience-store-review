@@ -1,9 +1,9 @@
 // @ts-check
 
 import inputReadFile from '../lib/view.js';
-import INVENTORY_FILE_PATH from './const.js';
+import CONVENIENCE_FILE_PATH from './const.js';
 
-class InventoryView {
+class ConvenienceStoreView {
   /**
    *
    * @param {string} products
@@ -31,9 +31,9 @@ class InventoryView {
    * @returns {Array<Array<string>> | string}
    */
   getProductsInfo() {
-    const products = inputReadFile(INVENTORY_FILE_PATH.PRODUCTS_FILE_PATH);
+    const products = inputReadFile(CONVENIENCE_FILE_PATH.PRODUCTS_FILE_PATH);
     return this.#parseProducts(products);
   }
 }
 
-export default InventoryView;
+export default ConvenienceStoreView;

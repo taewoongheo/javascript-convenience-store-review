@@ -46,8 +46,7 @@
 
 ## Object
 
-- Convenience-Store: 편의점
-- Inventory: 재고관리
+- Convenience-Store: 재고관리 및 편의점 프로세스
 - Product: 상품
 - Promotion: 프로모션
 - Membership: 멤버십
