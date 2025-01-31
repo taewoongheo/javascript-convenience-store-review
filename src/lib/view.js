@@ -14,6 +14,16 @@ export function inputReadFile(path) {
 
 /**
  *
+ * @param {string} query
+ * @returns {Promise<string>}
+ */
+export async function inputAsync(query) {
+  const result = await Console.readLineAsync(query);
+  return result;
+}
+
+/**
+ *
  * @param {string} message
  */
 export function output(message) {

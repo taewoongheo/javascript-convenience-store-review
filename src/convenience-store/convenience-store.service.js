@@ -1,43 +1,35 @@
 // @ts-check
 
-import ProductModel from '../Product.js';
+import OrderModel from '../order/Order.model.js';
+import ProductModel from '../product/Product.js';
 import ConvenienceStoreModel from './convenience-store.model.js';
-import ConvenienceStoreValidate from './convenience-store.validate.js';
+import OrderValidator from '../order/Order.validator.js';
 
 class ConvenienceStoreService {
   /** @type {ProductModel} */
   #productModel;
 
+  /** @type {OrderModel} */
+  #orderModel;
+
   /** @type {ConvenienceStoreModel} */
   #convenienceStoreModel;
 
-  /** @type {ConvenienceStoreValidate} */
-  #convenienceStoreValidator;
+  /** @type {OrderValidator} */
+  #orderValidator;
 
   constructor({ models, providers }) {
     const {
       ConvenienceStoreModel: convenienceStoreModel,
       Product: productModel,
+      OrderModel: orderModel,
     } = models;
-    const { ConvenienceStoreValidator: convenienceStoreValidator } = providers;
+    const { OrderValidator: orderValidator } = providers;
 
-    this.#productModel = productModel;
     this.#convenienceStoreModel = convenienceStoreModel;
-    this.#convenienceStoreValidator = convenienceStoreValidator;
-  }
-
-  #parseProductInfo(product) {
-    const splitProduct = product.split(',');
-    return [splitProduct[0], splitProduct[1], splitProduct[2], splitProduct[3]];
-  }
-
-  #generateProduct(product) {
-    const [name, price, amount, promotion] = this.#parseProductInfo(product);
-    return new ProductModel(name, price, amount, promotion);
-  }
-
-  #parseName(product) {
-    return product[0];
+    this.#productModel = productModel;
+    this.#orderModel = orderModel;
+    this.#orderValidator = orderValidator;
   }
 
   /**
@@ -45,12 +37,16 @@ class ConvenienceStoreService {
    * @param {Object} products
    */
   storeProducts(products) {
-    // TODO: 유효성 검증
-
     products.forEach((product) => {
       this.#convenienceStoreModel.addProduct(product);
     });
   }
+
+  /**
+   *
+   * @param {string} products
+   */
+  getProducts(products) {}
 }
 
 export default ConvenienceStoreService;

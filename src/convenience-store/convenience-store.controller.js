@@ -18,10 +18,12 @@ class ConvenienceStoreController {
     this.#convenienceStoreView = convenienceStoreView;
   }
 
-  init() {
+  async init() {
     const productInfo = this.#convenienceStoreView.getProductsInfo();
     this.#convenienceStoreService.storeProducts(productInfo);
     this.#convenienceStoreView.printProducts(productInfo);
+    const products = await this.#convenienceStoreView.inputProductsAndAmount();
+    this.#convenienceStoreService.getProducts(products);
   }
 }
 

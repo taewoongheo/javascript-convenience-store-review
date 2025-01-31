@@ -48,14 +48,6 @@ class Product {
   get name() {
     return this.#productName;
   }
-
-  toString() {
-    console.log(
-      `${this.#productName} ${this.#productPrice} ${
-        this.#normalProductAmount
-      } ${this.#promotionProductAmount} ${this.#promotion}`,
-    );
-  }
 }
 
 export default Product;

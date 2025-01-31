@@ -1,6 +1,6 @@
 // @ts-check
 
-import { inputReadFile, output } from '../lib/view.js';
+import { inputAsync, inputReadFile, output } from '../lib/view.js';
 import CONVENIENCE_FILE_PATH from './const.js';
 
 class ConvenienceStoreView {
@@ -10,7 +10,7 @@ class ConvenienceStoreView {
   });
 
   static QUERY = Object.freeze({
-    INPUT:
+    GET_PRODUCT_AND_AMOUNT:
       '구매하실 상품명과 수량을 입력해 주세요. ( 예 : [ 사이다 -2], [감자칩 -1])\n',
   });
 
@@ -52,10 +52,6 @@ class ConvenienceStoreView {
     output(ConvenienceStoreView.MESSAGES.WELCOME);
   }
 
-  #printInputQuery() {
-    output(ConvenienceStoreView.QUERY.INPUT);
-  }
-
   #printNewLine() {
     output('\n');
   }
@@ -83,7 +79,17 @@ class ConvenienceStoreView {
       this.#printProductInfo(p);
     }
     this.#printNewLine();
-    this.#printInputQuery();
+  }
+
+  /**
+   *
+   * @returns {Promise<string>}
+   */
+  async inputProductsAndAmount() {
+    const result = await inputAsync(
+      ConvenienceStoreView.QUERY.GET_PRODUCT_AND_AMOUNT,
+    );
+    return result;
   }
 }
 

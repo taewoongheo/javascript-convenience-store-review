@@ -1,6 +1,6 @@
 // @ts-check
 
-import ProductModel from '../Product.js';
+import ProductModel from '../product/Product.js';
 
 class ConvenienceStoreModel {
   /** @type {Array<ProductModel>} */
