@@ -26,13 +26,30 @@ class ConvenienceStoreService {
     this.#convenienceStoreValidator = convenienceStoreValidator;
   }
 
+  #parseProductInfo(product) {
+    const splitProduct = product.split(',');
+    return [splitProduct[0], splitProduct[1], splitProduct[2], splitProduct[3]];
+  }
+
+  #generateProduct(product) {
+    const [name, price, amount, promotion] = this.#parseProductInfo(product);
+    return new ProductModel(name, price, amount, promotion);
+  }
+
+  #parseName(product) {
+    return product[0];
+  }
+
   /**
    *
    * @param {Object} products
    */
   storeProducts(products) {
     // TODO: 유효성 검증
-    this.#convenienceStoreModel.setProducts(products);
+
+    products.forEach((product) => {
+      this.#convenienceStoreModel.addProduct(product);
+    });
   }
 }
 

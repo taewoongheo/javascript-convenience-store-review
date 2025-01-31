@@ -31,7 +31,10 @@ class ConvenienceStoreView {
    * @returns {Array<Array<string>> | string}
    */
   getProductsInfo() {
-    const products = inputReadFile(CONVENIENCE_FILE_PATH.PRODUCTS_FILE_PATH);
+    // `javascript-convenience-store-review/${CONVENIENCE_FILE_PATH.PRODUCTS_FILE_PATH}`
+    const products = inputReadFile(
+      `${CONVENIENCE_FILE_PATH.PRODUCTS_FILE_PATH}`,
+    );
     return this.#parseProducts(products);
   }
 }
