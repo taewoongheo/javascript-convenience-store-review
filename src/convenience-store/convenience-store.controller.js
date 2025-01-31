@@ -21,6 +21,7 @@ class ConvenienceStoreController {
   init() {
     const productInfo = this.#convenienceStoreView.getProductsInfo();
     this.#convenienceStoreService.storeProducts(productInfo);
+    this.#convenienceStoreView.printProducts(productInfo);
   }
 }
 
