@@ -4,6 +4,7 @@ import OrderModel from '../order/Order.model.js';
 import ProductModel from '../product/Product.js';
 import ConvenienceStoreModel from './convenience-store.model.js';
 import OrderValidator from '../order/Order.validator.js';
+import OrderProduct from '../order/OrderProduct.js';
 
 class ConvenienceStoreService {
   /** @type {ProductModel} */
@@ -44,9 +45,13 @@ class ConvenienceStoreService {
 
   /**
    *
-   * @param {string} products
+   * @param {string} order
+   * @returns {Array<OrderProduct>}
    */
-  getProducts(products) {}
+  generateOrder(order) {
+    // TODO: orderValidator 유효성 검사
+    return this.#orderModel.getOrderedProducts(order);
+  }
 }
 
 export default ConvenienceStoreService;

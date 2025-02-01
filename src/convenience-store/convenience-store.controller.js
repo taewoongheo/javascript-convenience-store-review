@@ -22,8 +22,8 @@ class ConvenienceStoreController {
     const productInfo = this.#convenienceStoreView.getProductsInfo();
     this.#convenienceStoreService.storeProducts(productInfo);
     this.#convenienceStoreView.printProducts(productInfo);
-    const products = await this.#convenienceStoreView.inputProductsAndAmount();
-    this.#convenienceStoreService.getProducts(products);
+    const order = await this.#convenienceStoreView.inputOrder();
+    const orderedProduct = this.#convenienceStoreService.generateOrder(order);
   }
 }
 
