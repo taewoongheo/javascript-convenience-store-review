@@ -24,6 +24,7 @@ class ConvenienceStoreController {
     this.#convenienceStoreView.printProducts(productInfo);
     const order = await this.#convenienceStoreView.inputOrder();
     const orderedProduct = this.#convenienceStoreService.generateOrder(order);
+    console.log(orderedProduct);
   }
 }
 
