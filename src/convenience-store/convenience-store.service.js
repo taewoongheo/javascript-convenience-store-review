@@ -49,7 +49,7 @@ class ConvenienceStoreService {
    * @returns {Array<OrderProduct>}
    */
   generateOrder(order) {
-    // TODO: orderValidator 유효성 검사
+    this.#orderValidator.validate(order);
     return this.#orderModel.getOrderedProducts(order);
   }
 }

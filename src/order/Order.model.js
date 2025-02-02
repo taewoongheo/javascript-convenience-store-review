@@ -1,13 +1,9 @@
 // @ts-check
 
+import SPLITTER from './const.js';
 import OrderProduct from './OrderProduct.js';
 
 class OrderModel {
-  static SPLITTER = Object.freeze({
-    PRODUCT_SPLITTER: ',',
-    NAME_AND_AMOUNT_SPLITTER: '-',
-  });
-
   /** @type {Array<OrderProduct>} */
   #products;
 
@@ -21,7 +17,7 @@ class OrderModel {
    * @returns {Array<string>}
    */
   #parseProducts(products) {
-    return products.trim().split(OrderModel.SPLITTER.PRODUCT_SPLITTER);
+    return products.trim().split(SPLITTER.PRODUCT_SPLITTER);
   }
 
   /**
@@ -31,9 +27,7 @@ class OrderModel {
    */
   #parseProductNameAndAmount(productStr) {
     const product = productStr.trim().replace(/\[|\]/g, '');
-    const [name, amount] = product.split(
-      OrderModel.SPLITTER.NAME_AND_AMOUNT_SPLITTER,
-    );
+    const [name, amount] = product.split(SPLITTER.NAME_AND_AMOUNT_SPLITTER);
     return [name, amount];
   }
 

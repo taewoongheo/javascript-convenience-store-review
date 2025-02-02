@@ -27,6 +27,7 @@ export default [
       'import/extensions': ['error', 'ignorePackages'],
       'class-methods-use-this': 'off',
       'no-unused-vars': 'off',
+      'no-unused-expressions': 'off',
     },
   },
   {
