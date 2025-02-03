@@ -48,6 +48,10 @@ class Product {
   get name() {
     return this.#productName;
   }
+
+  get amount() {
+    return this.#normalProductAmount;
+  }
 }
 
 export default Product;

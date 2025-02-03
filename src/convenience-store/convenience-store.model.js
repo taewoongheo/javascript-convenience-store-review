@@ -16,7 +16,7 @@ class ConvenienceStoreModel {
    */
   addProduct(product) {
     if (this.#isIncludeProduct(product[0])) {
-      const p = this.#findProductByName(product[0])[0];
+      const p = this.getProductByName(product[0]);
       p.addAmount(Number(product[2]), product[3]);
     } else {
       this.#products.push(
@@ -42,10 +42,10 @@ class ConvenienceStoreModel {
   /**
    *
    * @param {string} name
-   * @returns {ProductModel[]}
+   * @returns {ProductModel}
    */
-  #findProductByName(name) {
-    return this.#products.filter((product) => product.name === name);
+  getProductByName(name) {
+    return this.#products.filter((product) => product.name === name)[0];
   }
 
   getProducts() {

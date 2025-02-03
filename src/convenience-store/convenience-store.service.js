@@ -7,9 +7,6 @@ import OrderValidator from '../order/Order.validator.js';
 import OrderProduct from '../order/OrderProduct.js';
 
 class ConvenienceStoreService {
-  /** @type {ProductModel} */
-  #productModel;
-
   /** @type {OrderModel} */
   #orderModel;
 
@@ -22,13 +19,11 @@ class ConvenienceStoreService {
   constructor({ models, providers }) {
     const {
       ConvenienceStoreModel: convenienceStoreModel,
-      Product: productModel,
       OrderModel: orderModel,
     } = models;
     const { OrderValidator: orderValidator } = providers;
 
     this.#convenienceStoreModel = convenienceStoreModel;
-    this.#productModel = productModel;
     this.#orderModel = orderModel;
     this.#orderValidator = orderValidator;
   }
@@ -51,6 +46,23 @@ class ConvenienceStoreService {
   generateOrder(order) {
     this.#orderValidator.validate(order);
     return this.#orderModel.getOrderedProducts(order);
+  }
+
+  /**
+   *
+   * @param {Array<OrderProduct>} orderedProducts
+   * @returns {boolean}
+   */
+  isAllStocksAmountSufficient(orderedProducts) {
+    return orderedProducts.every((orderedProduct) => {
+      const stockProduct = this.#convenienceStoreModel.getProductByName(
+        orderedProduct.name,
+      );
+      if (stockProduct === undefined) {
+        return false;
+      }
+      return stockProduct.amount >= orderedProduct.amount;
+    });
   }
 }
 
