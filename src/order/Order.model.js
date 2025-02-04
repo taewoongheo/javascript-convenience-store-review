@@ -40,7 +40,7 @@ class OrderModel {
     const productList = this.#parseProducts(products);
     productList.forEach((productStr) => {
       const [name, amount] = this.#parseProductNameAndAmount(productStr);
-      this.#products.push(new OrderProduct(name, amount));
+      this.#products.push(new OrderProduct(name, Number(amount)));
     });
     return this.#products;
   }
