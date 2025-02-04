@@ -23,9 +23,7 @@ class ConvenienceStoreController {
     this.#convenienceStoreService.storeProducts(productInfo);
     this.#convenienceStoreView.printProducts(productInfo);
     const order = await this.#convenienceStoreView.inputOrder();
-    const orderedProduct = this.#convenienceStoreService.generateOrder(order);
-    const isStockProductSufficient =
-      this.#convenienceStoreService.isAllStocksAmountSufficient(orderedProduct);
+    this.#convenienceStoreService.buyProducts(order);
   }
 }
 

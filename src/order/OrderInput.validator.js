@@ -3,7 +3,7 @@
 import Validator from '../lib/Validator.js';
 import SPLITTER from './const.js';
 
-class OrderValidator {
+class OrderInputValidator {
   /**
    *
    * @param {string} value
@@ -51,4 +51,4 @@ class OrderValidator {
   }
 }
 
-export default OrderValidator;
+export default OrderInputValidator;
