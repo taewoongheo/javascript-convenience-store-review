@@ -1,5 +1,6 @@
 // @ts-check
 
+import OrderProduct from '../order/OrderProduct.js';
 import ProductModel from '../product/Product.js';
 
 class ConvenienceStoreModel {
@@ -48,8 +49,23 @@ class ConvenienceStoreModel {
     return this.#products.filter((product) => product.name === name)[0];
   }
 
+  /**
+   *
+   * @returns {Array<ProductModel>}
+   */
   getProducts() {
     return this.#products;
+  }
+
+  /**
+   *
+   * @param {Array<OrderProduct>} orderedProducts
+   */
+  decreaseProductsAmount(orderedProducts) {
+    orderedProducts.forEach((product) => {
+      const findProduct = this.getProductByName(product.name);
+      findProduct.decreaseAmount(product.amount);
+    });
   }
 }
 

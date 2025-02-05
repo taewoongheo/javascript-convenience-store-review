@@ -77,10 +77,10 @@ class ConvenienceStoreService {
    *
    * @param {string} order
    */
-  buyProducts(order) {
+  orderProduct(order) {
     const orderedProduct = this.#generateOrder(order);
     this.#validateProductAmount(orderedProduct);
-    // TODO: 차감
+    this.#convenienceStoreModel.decreaseProductsAmount(orderedProduct);
   }
 }
 

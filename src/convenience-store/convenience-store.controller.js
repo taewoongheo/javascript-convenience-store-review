@@ -23,7 +23,7 @@ class ConvenienceStoreController {
     this.#convenienceStoreService.storeProducts(productInfo);
     this.#convenienceStoreView.printProducts(productInfo);
     const order = await this.#convenienceStoreView.inputOrder();
-    this.#convenienceStoreService.buyProducts(order);
+    this.#convenienceStoreService.orderProduct(order);
   }
 }
 

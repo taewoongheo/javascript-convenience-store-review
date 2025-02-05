@@ -52,6 +52,14 @@ class Product {
   get amount() {
     return this.#normalProductAmount;
   }
+
+  /**
+   *
+   * @param {number} amount
+   */
+  decreaseAmount(amount) {
+    this.#normalProductAmount -= amount;
+  }
 }
 
 export default Product;
