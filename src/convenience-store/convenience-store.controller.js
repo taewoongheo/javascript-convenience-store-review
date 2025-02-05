@@ -22,8 +22,25 @@ class ConvenienceStoreController {
     const productInfo = this.#convenienceStoreView.getProductsInfo();
     this.#convenienceStoreService.storeProducts(productInfo);
     this.#convenienceStoreView.printProducts(productInfo);
+
+    await this.#order();
+  }
+
+  async #order() {
     const order = await this.#convenienceStoreView.inputOrder();
-    this.#convenienceStoreService.orderProduct(order);
+    const orderedProduct = this.#convenienceStoreService.generateOrder(order);
+    const checkObj =
+      this.#convenienceStoreService.checkPromotionAmount(orderedProduct);
+
+    checkObj.forEach((obj) => {
+      if (obj.info > 0) {
+        this.#convenienceStoreView.inputAddPromotionProduct(obj);
+      } else if (obj.info < 0) {
+        this.#convenienceStoreView.inputNotPromotinoProduct(obj);
+      }
+    });
+
+    this.#convenienceStoreService.stockProcess(orderedProduct);
   }
 }
 

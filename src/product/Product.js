@@ -53,6 +53,14 @@ class Product {
     return this.#normalProductAmount;
   }
 
+  get promotion() {
+    return this.#promotion;
+  }
+
+  get promotionAmount() {
+    return this.#promotionProductAmount;
+  }
+
   /**
    *
    * @param {number} amount

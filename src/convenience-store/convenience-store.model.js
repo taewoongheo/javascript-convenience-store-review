@@ -60,6 +60,54 @@ class ConvenienceStoreModel {
   /**
    *
    * @param {Array<OrderProduct>} orderedProducts
+   * @returns {Object}
+   */
+  #getOrderedProductAndPromotionProductAmount(orderedProducts) {
+    const orderedProduct = [];
+    orderedProducts.forEach((product) => {
+      const findProduct = this.getProductByName(product.name);
+      if (findProduct.promotion) {
+        orderedProduct.push({
+          productName: findProduct.name,
+          productPromotion: findProduct.promotion,
+          productAmount: findProduct.promotionAmount,
+          orderAmount: product.amount,
+        });
+      }
+    });
+    return orderedProduct;
+  }
+
+  /**
+   *
+   * @param {Array<OrderProduct>} orderedProducts
+   * @returns {Object}
+   */
+  checkPromotionAmount(orderedProducts) {
+    const amountObject =
+      this.#getOrderedProductAndPromotionProductAmount(orderedProducts);
+    const addObjectArr = [];
+    amountObject.forEach((object) => {
+      let after = 0;
+      if (object.productPromotion === '탄산2+1') {
+        const cnt = object.orderAmount;
+        const pcnt = object.productAmount;
+        after = pcnt - cnt;
+        if (after > 0 && cnt % 3 !== 0) {
+          after = 1;
+        }
+      }
+      addObjectArr.push({
+        name: object.productName,
+        info: after,
+      });
+    });
+    return addObjectArr;
+  }
+
+  /**
+   *
+   * @param {Array<OrderProduct>} orderedProducts
    */
   decreaseProductsAmount(orderedProducts) {
     orderedProducts.forEach((product) => {

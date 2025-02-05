@@ -76,11 +76,29 @@ class ConvenienceStoreService {
   /**
    *
    * @param {string} order
+   * @returns {Array<OrderProduct>}
    */
-  orderProduct(order) {
+  generateOrder(order) {
     const orderedProduct = this.#generateOrder(order);
     this.#validateProductAmount(orderedProduct);
-    this.#convenienceStoreModel.decreaseProductsAmount(orderedProduct);
+    return orderedProduct;
+  }
+
+  /**
+   *
+   * @param {Array<OrderProduct>} orderedProducts
+   * @returns {Object}
+   */
+  checkPromotionAmount(orderedProducts) {
+    return this.#convenienceStoreModel.checkPromotionAmount(orderedProducts);
+  }
+
+  /**
+   *
+   * @param {Array<OrderProduct>} orderedProducts
+   */
+  stockProcess(orderedProducts) {
+    this.#convenienceStoreModel.decreaseProductsAmount(orderedProducts);
   }
 }
 
