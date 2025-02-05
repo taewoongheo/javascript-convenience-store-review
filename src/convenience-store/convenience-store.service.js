@@ -5,6 +5,7 @@ import ConvenienceStoreModel from './convenience-store.model.js';
 import OrderInputValidator from '../order/OrderInput.validator.js';
 import OrderProduct from '../order/OrderProduct.js';
 import OrderAmountValidator from '../order/OrderAmount.validator.js';
+import OrderPromotionAddValidator from '../order/OrderPromotionAdd.validator.js';
 
 class ConvenienceStoreService {
   /** @type {OrderModel} */
@@ -19,6 +20,9 @@ class ConvenienceStoreService {
   /** @type {OrderAmountValidator} */
   #orderAmountValidator;
 
+  /** @type {OrderPromotionAddValidator} */
+  #orderPromotionAddValidator;
+
   constructor({ models, providers }) {
     const {
       ConvenienceStoreModel: convenienceStoreModel,
@@ -27,12 +31,14 @@ class ConvenienceStoreService {
     const {
       OrderInputValidator: orderInputValidator,
       OrderAmountValidator: orderAmountValidator,
+      OrderPromotionAddValidator: orderPromotionAddValidator,
     } = providers;
 
     this.#convenienceStoreModel = convenienceStoreModel;
     this.#orderModel = orderModel;
     this.#orderInputValidator = orderInputValidator;
     this.#orderAmountValidator = orderAmountValidator;
+    this.#orderPromotionAddValidator = orderPromotionAddValidator;
   }
 
   /**
@@ -111,6 +117,7 @@ class ConvenienceStoreService {
    */
   orderAmountChange(orderObj, input) {
     const { orderProduct, info } = orderObj;
+    this.#orderPromotionAddValidator.validate(input);
     if (info > 0) {
       if (input === 'Y') {
         orderProduct.orderProduct.increaseAmont(1);
