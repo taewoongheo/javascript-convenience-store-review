@@ -132,6 +132,10 @@ class ConvenienceStoreService {
   calculate(orderedProduct) {
     return this.#convenienceStoreModel.calculate(orderedProduct);
   }
+
+  getStoredProduct() {
+    return this.#convenienceStoreModel.getProducts();
+  }
 }
 
 export default ConvenienceStoreService;

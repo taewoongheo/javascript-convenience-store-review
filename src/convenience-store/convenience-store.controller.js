@@ -29,9 +29,14 @@ class ConvenienceStoreController {
   async init() {
     const productInfo = this.#convenienceStoreView.getProductsInfo();
     this.#convenienceStoreService.storeProducts(productInfo);
-    this.#convenienceStoreView.printProducts(productInfo);
 
-    await this.#order();
+    while (true) {
+      const storedProduct = this.#convenienceStoreService.getStoredProduct();
+      this.#convenienceStoreView.printProducts(storedProduct);
+      await this.#order();
+      const shouldContinue = await this.#convenienceStoreView.inputRepeat();
+      if (shouldContinue !== 'Y') break;
+    }
   }
 
   async #order() {

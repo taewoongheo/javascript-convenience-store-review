@@ -1,6 +1,7 @@
 // @ts-check
 
 import { inputAsync, inputReadFile, output } from '../lib/view.js';
+import Product from '../product/Product.js';
 import CONVENIENCE_FILE_PATH from './const.js';
 
 class ConvenienceStoreView {
@@ -12,6 +13,8 @@ class ConvenienceStoreView {
   static QUERY = Object.freeze({
     GET_PRODUCT_AND_AMOUNT:
       '구매하실 상품명과 수량을 입력해 주세요. ( 예 : [사이다-2], [감자칩-1])\n',
+    MEMBERSHIP: '멤버십 할인을 받으시겠습니까?\n',
+    REPEAT: '감사합니다. 구매하고 싶은 다른 상품이 있나요?\n',
   });
 
   /**
@@ -58,15 +61,15 @@ class ConvenienceStoreView {
 
   #printProductInfo(product) {
     output(
-      ` - ${product[0]} ${product[1]}원 ${product[2]}개 ${
-        product[3] === 'null' ? '' : product[3]
+      ` - ${product.name} ${product.price}원 ${product.amount}개 ${
+        product.promotion === 'null' ? '' : product.promotion
       }`,
     );
   }
 
   /**
    *
-   * @param {string[][] | string} products
+   * @param {Product[]} products
    */
   printProducts(products) {
     this.#printWelcome();
@@ -109,7 +112,12 @@ class ConvenienceStoreView {
   }
 
   async inputMembershipDiscount() {
-    const result = inputAsync('멤버십 할인을 받으시겠습니까?\n');
+    const result = inputAsync(ConvenienceStoreView.QUERY.MEMBERSHIP);
+    return result;
+  }
+
+  async inputRepeat() {
+    const result = inputAsync(ConvenienceStoreView.QUERY.REPEAT);
     return result;
   }
 }
