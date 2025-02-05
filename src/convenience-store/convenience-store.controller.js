@@ -32,15 +32,21 @@ class ConvenienceStoreController {
     const checkObj =
       this.#convenienceStoreService.checkPromotionAmount(orderedProduct);
 
-    checkObj.forEach(async (obj) => {
-      let result;
-      if (obj.info > 0) {
-        result = await this.#convenienceStoreView.inputAddPromotionProduct(obj);
-      } else if (obj.info < 0) {
-        result = await this.#convenienceStoreView.inputNotPromotinoProduct(obj);
-      }
-      this.#convenienceStoreService.orderAmountChange(obj, result);
-    });
+    await Promise.all(
+      checkObj.map(async (obj) => {
+        let result;
+        if (obj.info > 0) {
+          result = await this.#convenienceStoreView.inputAddPromotionProduct(
+            obj,
+          );
+        } else if (obj.info < 0) {
+          result = await this.#convenienceStoreView.inputNotPromotinoProduct(
+            obj,
+          );
+        }
+        this.#convenienceStoreService.orderAmountChange(obj, result);
+      }),
+    );
 
     this.#convenienceStoreService.stockProcess(orderedProduct);
   }

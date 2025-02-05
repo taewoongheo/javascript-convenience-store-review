@@ -117,6 +117,17 @@ class ConvenienceStoreModel {
       findProduct.decreaseAmount(product.amount);
     });
   }
+
+  /**
+   * @param {Array<OrderProduct>} orderedProduct
+   * @returns {number}
+   */
+  calculate(orderedProduct) {
+    return orderedProduct.reduce((acc, cur) => {
+      const findProduct = this.getProductByName(cur.name);
+      return acc + findProduct.price * cur.amount;
+    }, 0);
+  }
 }
 
 export default ConvenienceStoreModel;

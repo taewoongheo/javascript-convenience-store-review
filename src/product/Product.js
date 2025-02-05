@@ -61,6 +61,10 @@ class Product {
     return this.#promotionProductAmount;
   }
 
+  get price() {
+    return this.#productPrice;
+  }
+
   /**
    *
    * @param {number} amount

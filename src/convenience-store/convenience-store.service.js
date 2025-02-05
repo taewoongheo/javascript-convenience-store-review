@@ -128,6 +128,10 @@ class ConvenienceStoreService {
       }
     }
   }
+
+  calculate(orderedProduct) {
+    return this.#convenienceStoreModel.calculate(orderedProduct);
+  }
 }
 
 export default ConvenienceStoreService;

@@ -9,9 +9,10 @@ import ConvenienceStoreView from './convenience-store.view.js';
 import OrderInputValidator from '../order/OrderInput.validator.js';
 import OrderAmountValidator from '../order/OrderAmount.validator.js';
 import OrderPromotionAddValidator from '../order/OrderPromotionAdd.validator.js';
+import Membership from '../membership/membership.model.js';
 
 const convenienceModule = new Module({
-  models: [ConvenienceStoreModel, OrderModel],
+  models: [ConvenienceStoreModel, OrderModel, Membership],
   views: [ConvenienceStoreView],
   controllers: [ConvenienceStoreController],
   services: [ConvenienceStoreService],
