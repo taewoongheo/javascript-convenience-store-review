@@ -107,6 +107,11 @@ class ConvenienceStoreView {
     );
     return result;
   }
+
+  async inputMembershipDiscount() {
+    const result = inputAsync('멤버십 할인을 받으시겠습니까?\n');
+    return result;
+  }
 }
 
 export default ConvenienceStoreView;
