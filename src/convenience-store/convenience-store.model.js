@@ -66,12 +66,13 @@ class ConvenienceStoreModel {
     const orderedProduct = [];
     orderedProducts.forEach((product) => {
       const findProduct = this.getProductByName(product.name);
-      if (findProduct.promotion) {
+      if (findProduct.promotion === '탄산2+1') {
         orderedProduct.push({
           productName: findProduct.name,
           productPromotion: findProduct.promotion,
           productAmount: findProduct.promotionAmount,
           orderAmount: product.amount,
+          orderProduct: product,
         });
       }
     });
@@ -100,6 +101,7 @@ class ConvenienceStoreModel {
       addObjectArr.push({
         name: object.productName,
         info: after,
+        orderProduct: object,
       });
     });
     return addObjectArr;

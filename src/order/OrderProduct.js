@@ -17,6 +17,14 @@ class OrderProduct {
   get amount() {
     return this.#amount;
   }
+
+  increaseAmont(amount) {
+    this.#amount += amount;
+  }
+
+  decreaseAmount(amount) {
+    this.#amount -= amount;
+  }
 }
 
 export default OrderProduct;

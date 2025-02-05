@@ -32,12 +32,14 @@ class ConvenienceStoreController {
     const checkObj =
       this.#convenienceStoreService.checkPromotionAmount(orderedProduct);
 
-    checkObj.forEach((obj) => {
+    checkObj.forEach(async (obj) => {
+      let result;
       if (obj.info > 0) {
-        this.#convenienceStoreView.inputAddPromotionProduct(obj);
+        result = await this.#convenienceStoreView.inputAddPromotionProduct(obj);
       } else if (obj.info < 0) {
-        this.#convenienceStoreView.inputNotPromotinoProduct(obj);
+        result = await this.#convenienceStoreView.inputNotPromotinoProduct(obj);
       }
+      this.#convenienceStoreService.orderAmountChange(obj, result);
     });
 
     this.#convenienceStoreService.stockProcess(orderedProduct);

@@ -66,7 +66,10 @@ class ConvenienceStoreService {
         orderedProduct.name,
       );
       return {
-        stockProductAmount: stockProduct?.amount,
+        stockProductAmount:
+          stockProduct === undefined
+            ? undefined
+            : stockProduct.amount + stockProduct.promotionAmount,
         orderedProductAmount: orderedProduct.amount,
       };
     });
@@ -99,6 +102,24 @@ class ConvenienceStoreService {
    */
   stockProcess(orderedProducts) {
     this.#convenienceStoreModel.decreaseProductsAmount(orderedProducts);
+  }
+
+  /**
+   *
+   * @param {Object} orderObj
+   * @param {string | undefined} input
+   */
+  orderAmountChange(orderObj, input) {
+    const { orderProduct, info } = orderObj;
+    if (info > 0) {
+      if (input === 'Y') {
+        orderProduct.orderProduct.increaseAmont(1);
+      }
+    } else if (info < 0) {
+      if (input === 'N') {
+        orderProduct.orderProduct.decreaseAmount(Math.abs(info));
+      }
+    }
   }
 }
 
